@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konserler</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<nav id="e-menu">
+        <div class="e-sol-blok">
+            <a href="index.html" class="e-logo-link">
+                <img src="resimler/pera_logo2.jpeg" alt="" class="e-logo-resim">
+            </a> 
+    
+    </div>
+
+    <div class="e-sag-blok">
+        <ul class="menu-linkler">
+            <ul class="menu-linkler">
+                <li><a href="/">Anasayfa</a></li>
+                <li><a href="/konserler">Konserler</a></li>
+                <li><a href="/kullanici-giris">Giriş/Kayıt</a></li>
+                <li><a href="/iletisim">İletişim</a></li>
+            </ul>
+    </div>
+    </nav>
+
+
+
+    <main class="e-konser-foto">
+    <div class="e-kfotograf">
+        <img src="resimler/konserler_foto.jpeg" alt="" class="e-konserfoto">
+        </div>
+</main>
+
+
+
+
+<section class="e-konser-bolumu">
+    <div class="e-tablo-basligi">
+        <h2>PERA 2026 TURNE PROGRAMI VE BİLET FİYATLARI</h2>
+    </div>
+
+    <table class="e-konser-tablosu">
+        <thead>
+            <tr>
+                <th>Tarih</th>
+                <th>Şehir</th>
+                <th>Konser Alanı / Mekan</th>
+                <th>Bilet Fiyatı</th> <th>Bilet Durumu</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>12 Haziran 2026</td>
+                <td>İstanbul</td>
+                <td>Harbiye Cemil Topuzlu Açık Hava</td>
+                <td>450 TL</td>
+                <td><a href="#" class="e-bilet-butonu">Bilet Al</a></td>
+            </tr>
+            <tr>
+                <td>18 Haziran 2026</td>
+                <td>Ankara</td>
+                <td>Jolly Joker Ankara</td>
+                <td>400 TL</td>
+                <td><a href="#" class="e-bilet-butonu">Bilet Al</a></td>
+            </tr>
+            <tr>
+                <td>25 Haziran 2026</td>
+                <td>İzmir</td>
+                <td>İzmir Kültürpark Açıkhava</td>
+                <td>350 TL</td>
+                <td><a href="#" class="e-bilet-butonu">Bilet Al</a></td>
+            </tr>
+            <tr>
+                <td>04 Temmuz 2026</td>
+                <td>Bursa</td>
+                <td>Bursa Kültür Park Açık Hava</td>
+                <td>400 TL</td>
+                <td><a href="#" class="e-bilet-butonu e-tukendi">Tükendi</a></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+<script>
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            const e_tablo_govdesi = document.querySelector(".e-konser-tablosu tbody");
+            
+            
+            fetch('/api/251109037/konserler')
+                .then(response => response.json())
+                .then(e_konserler => {
+                    
+                    e_tablo_govdesi.innerHTML = "";
+                    
+                    
+                    e_konserler.forEach(e_konser => {
+                        const e_satir = document.createElement("tr");
+                        
+                        
+                        const e_buton_sinifi = e_konser.e_durum === 'Tükendi' ? 'e-bilet-butonu e-tukendi' : 'e-bilet-butonu';
+                        
+                        e_satir.innerHTML = `
+                            <td>${e_konser.e_tarih}</td>
+                            <td>${e_konser.e_sehir}</td>
+                            <td>${e_konser.e_mekan}</td>
+                            <td>${e_konser.e_fiyat} TL</td>
+                            <td><a href="#" class="${e_buton_sinifi}">${e_konser.e_durum}</a></td>
+                        `;
+                        
+                        e_tablo_govdesi.appendChild(e_satir);
+                    });
+                })
+                .catch(err => console.error("Konserler yüklenirken hata oluştu: ", err));
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

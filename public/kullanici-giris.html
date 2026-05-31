@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap/Kayıt Ol</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav id="e-menu">
+        <div class="e-sol-blok">
+            <a href="index.html" class="e-logo-link">
+                <img src="resimler/pera_logo2.jpeg" alt="" class="e-logo-resim">
+            </a> 
+        </div>
+        <div class="e-sag-blok">
+            <ul class="menu-linkler">
+                <li><a href="/">Anasayfa</a></li>
+                <li><a href="/konserler">Konserler</a></li>
+                <li><a href="/kullanici-giris">Giriş/Kayıt</a></li>
+                <li><a href="/iletisim">İletişim</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="e-merkez-kapsayici">
+        
+        
+        <div class="e-form-kutusu">
+            
+        
+            <form action="/api/251109037/giris-yap" method="POST" class="e-form-alanı">
+                <h3 class="e-form-baslik">GİRİŞ YAP</h3>
+                
+                <div class="e-girdi-grubu">
+                    <label>E-posta Adresi *</label>
+                    <input type="email" name="e_giris_eposta" required>
+                </div>
+                
+                <div class="e-girdi-grubu">
+                    <label>Şifre *</label>
+                    <input type="password" name="e_giris_sifre" required>
+                </div>
+                
+                <button type="submit" class="e-form-butonu">GİRİŞ YAP</button>
+            </form>
+
+            
+            <div class="e-form-ayrac"></div>
+
+        
+            <form action="/api/251109037/kayit-ol" method="POST" class="e-form-alanı">
+                <h3 class="e-form-baslik">ÜYE OL</h3>
+                
+                <div class="e-girdi-grubu">
+                    <label>İsim *</label>
+                    <input type="text" name="e_kayit_isim" required>
+                </div>
+
+                <div class="e-girdi-grubu">
+                    <label>Soyisim *</label>
+                    <input type="text" name="e_kayit_soyisim" required>
+                </div>
+                
+                <div class="e-girdi-grubu">
+                    <label>E-posta Adresi *</label>
+                    <input type="email" name="e_kayit_eposta" required>
+                </div>
+                
+                <div class="e-girdi-grubu">
+                    <label>Şifre *</label>
+                    <input type="password" name="e_kayit_sifre" required>
+                </div>
+
+                <div class="e-girdi-grubu">
+                    <label>Telefon Numarası *</label>
+                    <input type="tel" name="e_kayit_telefon" required>
+                </div>
+                
+                <button type="submit" class="e-form-butonu">KAYIT OL</button>
+            </form>
+
+        </div>
+    </div>
+    
+</body>
+</html>

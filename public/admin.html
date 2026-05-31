@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pera Bilet - Admin Yönetim Paneli</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .e-admin-panel { max-width: 1000px; margin: 50px auto; padding: 20px; color: #fff; }
+        .e-admin-form { background: #0d0d0d; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 4px; }
+        .e-form-satir { display: flex; gap: 15px; margin-bottom: 15px; }
+        .e-form-satir input, .e-form-satir select { flex: 1; padding: 10px; background: #1a1a1a; border: 1px solid #333; color: #fff; border-radius: 4px; }
+        .e-sil-butonu { background-color: #b22222; color: white; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="e-admin-panel">
+        <h2>Pera Turne Yönetim Paneli</h2>
+        <hr style="border-color:#333; margin-bottom:30px;">
+
+        <div class="e-admin-form">
+            <h3>Yeni Konser Ekle</h3>
+            <form id="e-konser-ekle-form">
+                <div class="e-form-satir">
+                    <input type="text" id="e_tarih" placeholder="Konser Tarihi (Örn: 20 Temmuz 2026)" required>
+                    <input type="text" id="e_sehir" placeholder="Şehir" required>
+                    <input type="text" id="e_mekan" placeholder="Mekan Kompleks" required>
+                </div>
+                <div class="e-form-satir">
+                    <input type="number" id="e_fiyat" placeholder="Bilet Fiyatı (TL)" required>
+                    <select id="e_durum">
+                        <option value="Bilet Al">Bilet Al</option>
+                        <option value="Tükendi">Tükendi</option>
+                    </select>
+                    <button type="submit" class="e-form-butonu" style="margin:0; padding:10px;">Konseri Kaydet</button>
+                </div>
+            </form>
+        </div>
+
+        <h3 style="margin-top: 40px;">Mevcut Konser Listesi</h3>
+        <table class="e-konser-tablosu" id="e-admin-tablo">
+            <thead>
+                <tr>
+                    <th>Tarih</th>
+                    <th>Şehir</th>
+                    <th>Mekan</th>
+                    <th>Fiyat</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const e_tablo_body = document.querySelector("#e-admin-tablo tbody");
+            const e_form = document.getElementById("e-konser-ekle-form");
+
+            
+            function eKonserleriGetir() {
+                fetch('/api/251109037/konserler')
+                    .then(res => res.json())
+                    .then(veriler => {
+                        e_tablo_body.innerHTML = "";
+                        veriler.forEach(k => {
+                            const tr = document.createElement("tr");
+                            tr.innerHTML = `
+                                <td>${k.e_tarih}</td>
+                                <td>${k.e_sehir}</td>
+                                <td>${k.e_mekan}</td>
+                                <td>${k.e_fiyat} TL</td>
+                                <td><button class="e-sil-butonu" data-id="${k.e_konser_id}">Sil</button></td>
+                            `;
+                            e_tablo_body.appendChild(tr);
+                        });
+                    });
+            }
+
+            
+            e_form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const veri = {
+                    e_tarih: document.getElementById("e_tarih").value,
+                    e_sehir: document.getElementById("e_sehir").value,
+                    e_mekan: document.getElementById("e_mekan").value,
+                    e_fiyat: document.getElementById("e_fiyat").value,
+                    e_durum: document.getElementById("e_durum").value
+                };
+
+                fetch('/api/251109037/konserler', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(veri)
+                }).then(() => {
+                    e_form.reset();
+                    eKonserleriGetir();
+                });
+            });
+
+            
+            e_tablo_body.addEventListener("click", (e) => {
+                if(e.target.classList.contains("e-sil-butonu")) {
+                    const id = e.target.getAttribute("data-id");
+                    if(confirm("Bu konseri turne programından silmek istediğinize emin misiniz?")) {
+                        fetch(`/api/251109037/konserler/${id}`, { method: 'DELETE' })
+                            .then(() => eKonserleriGetir());
+                    }
+                }
+            });
+
+            eKonserleriGetir();
+        });
+    </script>
+</body>
+</html>

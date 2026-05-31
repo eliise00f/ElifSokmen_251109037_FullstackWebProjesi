@@ -1,0 +1,506 @@
+
+/*
+Hocam tarayacının verdiği varsayılan boşlukları kaldırmak için bu kodu yazdım
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/*
+Burda web projemin "Kullanılacak ana renkler" kısmı için siyah arkaplan kullandım. 
+Yazıları da beyaz yaptım
+*/
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+
+/*
+Menüyü üstte sabitlemek ve iki uca yaslamak için flex ve position kullandım
+*/
+#e-menu {
+    display: flex; /* içindeki elemanları yan yana dizmesi için */
+    justify-content: flex-start; /*menü yazılarını logonun yanına yasladım*/
+    gap: 150px; /*logoyla menü yazılarının arasına mesafe koydum*/
+    align-items: center; /* dikeyde tam ortalanması için */
+    padding: 15px 40px; /*içeriden boşluk verdim*/
+    background-color: #000000;
+    position: sticky; /*sayfa kaydıkça manü üstte kalsın diye*/ 
+    top: 0;
+    z-index: 1000; /*menünün önde kalması için*/
+}
+
+
+.e-logo-link{
+    display: inline-block;
+}
+
+
+.e-logo-resim {
+    height: 90px;
+    width: auto;
+}
+
+
+.menu-linkler{
+    display: flex;
+    list-style: none; /*noktaları kaldırdım*/
+    gap: 30px; /*yazıların arasını açtım*/
+}
+
+
+.menu-linkler li a {
+    text-decoration: none; /*yazıların altındaki çizgiyi kaldırdım*/
+    color: #949494;
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase; /*harfleri büyüttüm*/
+    transition: color 0.3s ease; /*renk geçişi yumuşak olması için*/
+}
+
+
+.menu-linkler li a:hover {
+    color: #ffffff;
+}
+
+
+/*Hocam burada posisiton ile yazı kutusunun bu kapak sınırları dışına taşmasını engelledim, 
+margin'le üstten ve alttan boşluk bırakarak alanı sayfada ortaladım yani kapak fotoğrafını
+ve yazıyı saran bir kapsayıcı oluşturdum*/
+.e-kapak-fotografi {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto;
+    height: 500px;
+    overflow: hidden;
+}
+
+
+.pera-kapak {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+
+.e-karsilama-yazisi {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+
+    padding: 60px 10px;
+    text-align: center;
+}
+
+
+.e-karsilama-yazisi h1 {
+    font-size: 65px;    
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+    letter-spacing: 3px;
+}
+
+
+
+.e-tanitim {
+    width: 100%;
+    max-width: 1000px;      
+    margin: 60px auto;      
+    padding: 0 20px;        
+    text-align: center;
+}
+
+
+.e-tanitim-yazisi h1 {
+    font-size: 42px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.e-video {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 45%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;   
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05); 
+    margin-top: 40px
+}
+    
+
+.e-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+
+/*KONSERLER SAYFASI İÇİN CSS KODLARI*/
+
+body {
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+.e-konser-foto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+.e-kfotograf {
+    max-width: 800px;
+    width: 100%;
+    border: 1px solid #222;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.1); 
+    overflow: hidden;
+}
+
+
+
+.e-konserfoto {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+
+
+.e-konser-bolumu {
+    width: 100%;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.e-tablo-basligi h2 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+
+.e-konser-tablosu {
+    width: 100%;
+    border-collapse: collapse; 
+    font-size: 16px;
+    color: #ffffff;
+    text-align: left;
+}
+
+.e-konser-tablosu thead tr {
+    background-color: #1a1a1a; 
+    color: #b22222;
+    font-weight: bold;
+}
+
+.e-konser-tablosu th, 
+.e-konser-tablosu td {
+    padding: 18px 20px; 
+}
+
+
+/* Hocam burada istediğiniz nth-child kullandım ve çift satırların arka planını bir tık açık gri yaptım*/
+.e-konser-tablosu tbody tr:nth-child(even) {
+    background-color: #444444; 
+}
+
+
+.e-konser-tablosu tbody tr:nth-child(odd) {
+    background-color: #000000;
+}
+
+.e-konser-tablosu tbody tr {
+    border-bottom: 1px solid #1a1a1a;
+    transition: background-color 0.2s ease;
+}
+
+
+/* Kullanıcı tablonun satırına yaklaştığında hangi konsere baktığını anlasın diye satıra hover efekti verdim */
+.e-konser-tablosu tbody tr:hover {
+    background-color: #944444;
+}
+
+
+.e-bilet-butonu {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #b22222; 
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.e-bilet-butonu:hover {
+    background-color: #e60000; 
+}
+
+
+.e-bilet-butonu.e-tukendi {
+    background-color: #333333;
+    color: #888888;
+    pointer-events: none; 
+}
+
+
+
+
+
+
+
+
+/*KULLANICI GİRİŞ VE KAYIT CSS*/
+
+.e-merkez-kapsayici {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 60px 20px;
+}
+
+
+.e-form-kutusu {
+    width: 100%;
+    max-width: 500px;
+    background-color: #0d0d0d;
+    border: 1px solid #222222;
+    padding: 45px 35px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+
+.e-form-baslik {
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    border-left: 4px solid #b22222; 
+    padding-left: 10px;
+}
+
+.e-girdi-grubu {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.e-girdi-grubu label {
+    color: #949494;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.e-girdi-grubu input {
+    padding: 12px;
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+
+.e-girdi-grubu input:focus {
+    border-color: #b22222;
+    background-color: #222222;
+    outline: none;
+}
+
+
+
+.e-form-butonu {
+    width: 100%;
+    padding: 14px;
+    background-color: #b22222;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.e-form-butonu:hover {
+    background-color: #e60000;
+}
+
+
+.e-form-ayrac {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #333333, transparent);
+    margin: 40px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*İLETİŞİM SAYFASI CSS KODLARI*/
+
+
+.e-iletisim-alani {
+    display: flex;
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 0 20px;
+    gap: 50px;
+    color: #ffffff;
+}
+
+
+.e-iletisim-sol, .e-iletisim-sag {
+    flex: 1;
+}
+
+.e-iletisim-sol h2, .e-iletisim-sag h3 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #ffffff;
+    border-left: 4px solid #b22222;
+    padding-left: 12px;
+}
+
+
+.e-bilgi-listesi p {
+    margin-bottom: 18px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.e-bilgi-listesi p i {
+    color: #b22222;
+    font-size: 18px;
+    width: 20px;
+}
+
+
+.e-harita-kapsayici {
+    margin-top: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #222222;
+}
+
+
+.e-form-grup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.e-form-grup label {
+    font-size: 14px;
+    color: #949494;
+    margin-bottom: 8px;
+}
+
+
+.e-form-grup input, 
+.e-form-grup select, 
+.e-form-grup textarea {
+    padding: 12px;
+    background-color: #0d0d0d;
+    border: 1px solid #333333;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+
+.e-form-grup input:focus, 
+.e-form-grup select:focus, 
+.e-form-grup textarea:focus {
+    border-color: #b22222;
+    outline: none;
+}
+
+
+.e-radio-secenekleri {
+    display: flex;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+.e-radio-secenekleri label {
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.e-iletisim-butonu {
+    width: 100%;
+    padding: 14px;
+    background-color: #b22222;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.e-iletisim-butonu:hover {
+    background-color: #e60000;
+}
+
+
